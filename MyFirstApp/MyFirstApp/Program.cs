@@ -50,6 +50,14 @@ namespace MyFirstApp
 
             }
 
+            List<IMovable> movableThings = new();
+            movableThings.AddRange(mammals);
+            movableThings.Add(new Vehicle());
+
+            foreach(IMovable thing in movableThings)
+            {
+                Console.WriteLine(thing.Move("Left", 10));
+            }
 
 
             //Mammal nm = m.GetMammal(Animal.Elephant);
@@ -110,7 +118,7 @@ namespace MyFirstApp
         }
     }
 
-    public abstract class Mammal
+    public abstract class Mammal: IMovable
     {
 
 
@@ -196,9 +204,10 @@ namespace MyFirstApp
 
         }
 
-        public string Move()
+
+        public string Move(string direction, int speed)
         {
-            return "Plod plod";
+            return $"I'm a mammal using my {LimbCount} limbs to move {direction} at {speed} kph";
         }
     }
 
