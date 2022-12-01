@@ -1,0 +1,82 @@
+﻿@page "/calculator"
+
+<PageTitle>Calculator</PageTitle>
+
+<h1>Calculator</h1>
+
+<p role="status">Result: @result</p>
+
+<h1>Inputs</h1>
+<table class="table table-dark">
+    <tbody>
+        <tr>
+            <td>
+                <input type="number" min="0" max="100" placeholder="Number1" @bind="number1">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="number" min="0" max="100" placeholder="Number2" @bind="number2">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="btn btn-primary" onclick="@(() => DoCalc("+"))">Add</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="btn btn-primary" onclick="@(() => DoCalc("-"))">Subtract</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="btn btn-primary" onclick="@(() => DoCalc("*"))">Multiply</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="btn btn-primary" onclick="@(() => DoCalc("/"))">Divide</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+@code {
+    private int result = 0;
+    //const string addOp = "+";
+    //const string subOp = "-";
+    //const string multOp = "*";
+    //const string divOp = "/";
+
+    private void DoCalc(string operation)
+    {
+        if (number1 != null && number2 != null)
+        {
+            switch (operation)
+            {
+                case "+":
+                    result = (int)number1 + (int)number2;
+                    break;
+                case "-":
+                    result = (int)number1 - (int)number2;
+                    break;
+                case "*":
+                    result = (int)number1 * (int)number2;
+                    break;
+                case "/":
+                    result = (int)number1 / (int)number2;
+                    break;
+                default:
+                    result = 0;
+                    break;
+            }
+        }
+
+    }
+}
+
+@code {
+    private int? number1;
+    private int? number2;
+}

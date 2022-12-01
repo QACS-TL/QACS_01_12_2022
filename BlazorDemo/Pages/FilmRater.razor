@@ -1,0 +1,54 @@
+﻿@page "/filmRater"
+
+<PageTitle>Film Rater</PageTitle>
+
+<h2>Rate: @FilmTitle</h2>
+
+<p role="status">Current rating: @currentRating</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Vote Up</button>
+<button class="btn btn-primary" @onclick="DecrementCount">Vote Down</button>
+<br />
+
+<!--  Show a number of stars based on the number of clicks -->
+@for (int i = 0; i < currentRating; i++)
+{
+    <img width="32px" src="https://icons.iconarchive.com/icons/goodstuff-no-nonsense/free-space/1024/star-icon.png">
+}
+
+@code {
+    private int currentRating = 0;
+   string FilmTitle { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+            Random r = new Random(DateTime.Now.Millisecond);
+            int year = (int)r.NextInt64(1960, 1960 + films.Count);
+            FilmTitle = films[year];
+    }
+
+    private void IncrementCount()
+    {
+        if(currentRating < 10)
+            currentRating++;
+    }
+
+    
+    private void DecrementCount()
+    {
+        if(currentRating > 0)
+            currentRating--;
+    }
+
+    Dictionary<int, string> films = new Dictionary<int, string>
+    {
+        {1960, "Psycho"},{1961, "West Side Story"},{1962, "Dr. No"},{1963, "The Great Escape"},{1964, "Goldfinger"},{1965, "Thunderball"},{1966, "Batman"},{1967, "You Only Live Twice"},{1968, "Oliver!"},{1969, "On Her Majesty's Secret Service"},
+        {1970, "Beneath the Planet of the Apes"},{1971, "Diamonds Are Forever"},{1972, "The Godfather"},{1973, "Live and Let Die"},{1974, "The Man with the Golden Gun"},{1975, "Monty Python and the Holy Grail"},{1976, "Rocky"},{1977, "Star Wars"},{1978, "Grease"},{1979, "Moonraker"},
+        {1980, "The Blues Brothers"},{1981, "Raiders of the Lost Ark"},{1982, "E.T. the Extra-Terrestrial"},{1983, "Return of the Jedi"},{1984, "Indiana Jones and the Temple of Doom"},{1985, "A View to a Kill"},{1986, "Top Gun"},{1987, "The Living Daylights"},{1988, "Die Hard"},{1989, "Indiana Jones and the Last Crusade"},
+        {1990, "Die Hard 2"},{1991, "Robin Hood: Prince of Thieves"},{1992, "Wayne's World"},{1993, "Jurassic Park"},{1994, "Four Weddings and a Funeral"},{1995, "Die Hard: With a Vengeance"},{1996, "Mission: Impossible"},{1997, "Men in Black"},{1998, "Armageddon"},{1999, "Star Wars: Episode I - The Phantom Menace"},
+        {2000, "Gladiator"},{2001, "Harry Potter and the Philosopher's Stone"},{2002, "Harry Potter and the Chamber of Secrets"},{2003, "Finding Nemo"},{2004, "Harry Potter and the Prisoner of Azkaban"},{2005, "Harry Potter and the Goblet of Fire"},{2006, "Casino Royale"},{2007, "Harry Potter and the Order of the Phoenix"},{2008, "Indiana Jones and the Kingdom of the Crystal Skull"},{2009, "Harry Potter and the Half-Blood Prince"},
+        {2010, "Inception"},{2011, "Pirates of the Caribbean: On Stranger Tides"},{2012, "Skyfall"},{2013, "Frozen"},{2014, "Guardians of the Galaxy"},{2015, "Minions"},{2016, "Finding Dory"},{2017, "Star Wars: The Last Jedi"},{2018, "Incredibles 2"},{2019, "The Lion King"},
+        {2020, "The Eight Hundred"},{2021, "No Time to Die"},{2022, "Top Gun: Maverick"},
+    };
+
+}
